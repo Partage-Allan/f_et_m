@@ -22,21 +22,34 @@
                 </ul>
             
                 <h1>Creer une nouvelle news !</h1><br/><br/>     
-                <form method="post" action="creer_news.php"/>
-                    Titre : <input type="text" name="titre_new" id="titre_new" style="margin-left: 20px;"/><br/><br/>
-                    Contenu: <textarea name=contenu_new id="contenu_new" style="width:300px;height:150px;"></textarea><br/><br/>    
-                    <input type="submit" value="Creer news" style="margin-left: 160px"/>
-                </form><br/><br/>                     
+                                
             </div>
             
-            <?php
-                    require ("sql.inc.php");
-                    if(!empty($_POST))
-                    {
-                        extract($_POST);
-                        $date = date('Y-m-d H:i:s');
-                        $sql= "INSERT INTO news VALUES ('', '$titre_new', '$contenu_new', '$date')";
-                        $resultat = executer_requete($sql);
-                        header("Location: news.php");
-                    }
-            ?>
+<?php
+    require ("sql.inc.php");
+    
+    //Vérifier que la variable est présente, et afficher "news crée"
+    if(isset($_GET['creation']) && $_GET['creation'] == "true")
+    {
+        printf("<p>La news à été ajoutée.</p>");
+        printf("<p><a href=\"news.php\">Retour au menu news</a></p>");
+        
+        if(!empty($_POST))
+        {
+            extract($_POST);
+            $date = date('Y-m-d');
+            $heure = date('H:i:s');
+            $sql= "INSERT INTO news VALUES ('', '$titre_new', '$contenu_new', '$date', '$heure')";
+            $resultat = executer_requete($sql);
+
+        }
+    }   
+    else
+    {
+        printf("<form method=\"post\" action=\"creer_news.php?creation=true\"/>");
+            printf("Titre : <input type=\"text\" name=\"titre_new\" id=\"titre_new\" style=\"margin-left: 20px;\"/><br/><br/>");
+            printf("Contenu: <textarea name=\"contenu_new\" id=\"contenu_new\" style=\"width:300px;height:150px;\"></textarea><br/><br/>");    
+            printf("<input type=\"submit\" value=\"Créer news\" style=\"margin-left: 160px\"/>");
+        printf("</form><br/><br/>");  
+    }
+?>

@@ -26,18 +26,19 @@
 <?php
 require ("sql.inc.php");
 
-$sql="SELECT * FROM news";
+$sql="SELECT * FROM (SELECT * FROM news ORDER BY heure_new DESC) table_temp ORDER BY date_new DESC";
 $resultat = executer_requete($sql);
     while ($donnees = $resultat->fetch()){
         $id = $donnees['id_new'];
         $titre = $donnees['titre_new'];
         $contenu = $donnees['contenu_new'];
         $date = $donnees ['date_new'];
-        echo "<p>Titre new: $titre <br/><br/>";
-        echo "Conetnu new: $contenu <br/><br/>";
-        echo "Date de publication: $date</p><br/>";
-        echo "<a href=\"edit.php\">Modifier cette news</a>";
-        echo " -- <a href=\"supprimer_new.php?id={$donnees['id_new']}\">Supprimer cette new</a>";
+        $heure = $donnees['heure_new'];
+        echo "<p>Titre: $titre </p><br/><br/>";
+        echo "Conetnu: $contenu <br/><br/>";
+        echo "<p>Date de publication: $date - $heure</p><br/>";
+        echo "<a href=\"modifier_news.php?id=" . $id . "\">Modifier cette news</a>";
+        echo " -- <a href=\"supprimer_news.php?id=" . $id . "\">Supprimer cette new</a>";
         echo "</p>";
     }
     
