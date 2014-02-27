@@ -19,8 +19,6 @@
                             <li><a href="creer_news.php">Creer une news</a></li>
                 </ul><br/><br/>
                         
-                        
-                        
             </div>
      </div>
 
