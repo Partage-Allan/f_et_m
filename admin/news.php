@@ -21,7 +21,7 @@
                 </ul>
             </div>
             
-            <h2>Les dernières news postées:</h2>
+            <h1>Les dernières news postées:</h1>
              
 <?php
 require ("sql.inc.php");
@@ -34,12 +34,12 @@ $resultat = executer_requete($sql);
         $contenu = $donnees['contenu_new'];
         $date = $donnees ['date_new'];
         $heure = $donnees['heure_new'];
-        echo "<p>Titre: $titre </p><br/><br/>";
-        echo "Conetnu: $contenu <br/><br/>";
-        echo "<p>Date de publication: $date - $heure</p><br/>";
-        echo "<a href=\"modifier_news.php?id=" . $id . "\">Modifier cette news</a>";
-        echo " -- <a href=\"supprimer_news.php?id=" . $id . "\">Supprimer cette new</a>";
-        echo "</p>";
+        printf("<div class=\"news_complete\" ><p class=\"titre_news\">Titre: $titre");
+        printf("<p class=\"contenu_news\" >Contenu: $contenu </p>");
+        printf("<p class=\"date_news\" >Date de publication: $date - $heure</p>");
+        echo "<p class=\"modif_supp_news\"><a href=\"modifier_news.php?id=" . $id . "\">Modifier cette news</a>";
+        echo " -- <a href=\"supprimer_news.php?id=" . $id . "&suppr=true\">Supprimer cette new</a>";
+        echo "</p></div>";
     }
     
     $resultat->closeCursor();

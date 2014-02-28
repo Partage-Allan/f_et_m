@@ -13,7 +13,7 @@
             <header><img id="logo" src="../images/logo1.png" alt="logo"><img id="texte-titre" src="../images/txt_f_et_m.png" alt="texte formes et Matières"></header>
             <div id="big_conteneur">
                 <ul id="navigation" class="nav-main">
-                    <li class="list"><a href="index.php/">Accueil Admin</a></li>
+                    <li class="list"><a href="index.php">Accueil Admin</a></li>
                     <li class="list"><a href="news.php">Gestion News</a>
                         <ul class="nav-sub">
                             <li><a href="creer_news.php">Creer une news</a></li>
@@ -22,8 +22,7 @@
                 </ul>
             
                 <h1>Creer une nouvelle news !</h1><br/><br/>     
-                                
-            </div>
+     
             
 <?php
     require ("sql.inc.php");
@@ -39,7 +38,7 @@
             extract($_POST);
             $date = date('Y-m-d');
             $heure = date('H:i:s');
-            $sql= "INSERT INTO news VALUES ('', '$titre_new', '$contenu_new', '$date', '$heure')";
+            $sql= "INSERT INTO news VALUES ('', '$titre_new', '" . addslashes($contenu_new) . "', '$date', '$heure')";
             $resultat = executer_requete($sql);
 
         }
@@ -53,3 +52,8 @@
         printf("</form><br/><br/>");  
     }
 ?>
+                           
+            </div>
+        </div>
+    </body>
+</html>

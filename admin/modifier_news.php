@@ -20,6 +20,7 @@
                         </ul>
                     </li>
                 </ul>
+            
 <?php
 require ("sql.inc.php");
 if(isset($_GET["id"]))
@@ -35,7 +36,7 @@ if(isset($_GET["modif"]) && $_GET["modif"] == "true")
     if(!empty($_POST))
     {
         extract($_POST);
-        $sql="UPDATE news SET titre_new ='" . $titre_new . "', contenu_new = '" . $contenu_new . "' WHERE id_new ='" . $id . "'"; 
+        $sql="UPDATE news SET titre_new ='" . $titre_new . "', contenu_new = '" . addslashes($contenu_new) . "' WHERE id_new ='" . $id . "'"; 
         $resultat = executer_requete($sql);   
     }
 }
@@ -62,7 +63,10 @@ else
     printf("</form><br/><br/>");
 }
 ?>
-
+            </div>
+        </div>
+    </body>
+</html>
 
 
 
